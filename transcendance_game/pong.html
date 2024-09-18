@@ -18,6 +18,7 @@
                 game.displayPlayers();
                 game.moveBall();
                 game.collideBallWithPlayersAndAction();
+                game.playerScoring();
                 requestAnimId = window.requestAnimationFrame(main);
             }
             window.onload = initiate;

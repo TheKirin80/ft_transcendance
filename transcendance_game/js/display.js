@@ -67,9 +67,10 @@ game.display = {
         targetLayer.context2D.fillText(text, x, y);
     },
 
-    drawCircleInLayer : function(targetLayer, color, x, y, radius, startAngle, endAngle){
+    drawCircleInLayer : function(targetLayer, color, x, y, radius){
+        targetLayer.context2D.beginPath();
         targetLayer.context2D.fillStyle = color;
-        targetLayer.context2D.arc(x, y, radius, startAngle, endAngle);
+        targetLayer.context2D.arc(x, y, radius, 0, 2 * Math.PI);
         targetLayer.context2D.fill();
     }
 }

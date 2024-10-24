@@ -2,9 +2,11 @@
     <body>
     </body>
     <script src="js/game.js"></script>
-    <script src="js/game.display.js"></script>
-    <script src="js/game.controle.js"></script>
-    <script src="js/game.keycode.js"></script>
+    <script src="js/display.js"></script>
+    <script src="js/controle.js"></script>
+    <script src="js/keycode.js"></script>
+    <script src="js/geometry.js"></script>
+    <script src="js/ia.js"></script>
     <script>
         (function (){
             let requestAnimId;
@@ -14,12 +16,16 @@
             }
             let main = function() {
                 game.clearLayer(game.playersBallLayer);
+                if (game.playerTwo.aiOption == true)
+                    game.ia.moveIa(game.playerTwo, game.ball);
                 game.movePlayers();
                 game.displayPlayers();
                 game.moveBall();
                 game.collideBallWithPlayersAndAction();
                 game.playerScoring();
-                requestAnimId = window.requestAnimationFrame(main);
+                if (game.winCondition() == false)
+                    requestAnimId = window.requestAnimationFrame(main);
+                
             }
             window.onload = initiate;
         })();

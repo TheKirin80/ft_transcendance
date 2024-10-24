@@ -1,4 +1,4 @@
-game.display = {
+    game.display = {
     container : "",
 
     layer : {

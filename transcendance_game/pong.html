@@ -15,14 +15,17 @@
                 requestAnimId = window.requestAnimationFrame(main);
             }
             let main = function() {
-                game.clearLayer(game.playersBallLayer);
-                if (game.playerTwo.aiOption == true)
-                    game.ia.moveIa(game.playerTwo, game.ball);
-                game.movePlayers();
-                game.displayPlayers();
-                game.moveBall();
-                game.collideBallWithPlayersAndAction();
-                game.playerScoring();
+                if (game.begin == true)
+                {
+                    game.clearLayer(game.playersBallLayer);
+                    if (game.playerTwo.aiOption == true)
+                        game.ia.moveIa(game.playerTwo, game.ball);
+                    game.movePlayers();
+                    game.displayPlayers();
+                    game.moveBall();
+                    game.collideBallWithPlayersAndAction();
+                    game.playerScoring();
+                }
                 if (game.winCondition() == false)
                     requestAnimId = window.requestAnimationFrame(main);
                 

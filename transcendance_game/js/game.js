@@ -1,4 +1,7 @@
 const game = {
+    begin : false,
+    winValue : 1,
+    winnerGame : "Nothing",
     groundWidth : 700,
     groundHeight : 400,
     groundColor: "#000000",
@@ -6,7 +9,9 @@ const game = {
     netColor : "#FFFFFF",
 
     scorePosPlayer1 : 300,
+    namePosPlayer1 : 125,
     scorePosPlayer2 : 365,
+    namePosPlayer2 : 500,
     scorePlayer1 : 0,
     scorePlayer2 : 0,
     groundLayer : null,
@@ -82,6 +87,7 @@ const game = {
         goDown : false,
         aiOption : false,
         originalPosition : "left",
+        playerName : "RandomOne",
         start : function(){
             this.posY = game.groundHeight / 2 - this.height / 2;
             this.goUp = false;
@@ -100,7 +106,8 @@ const game = {
         goUp : false,
         goDown : false,
         originalPosition : "right",
-        aiOption : true,
+        aiOption : false,
+        playerName : "RandomTwo",
         start : function(){
             this.posY = game.groundHeight / 2 - this.height / 2;
             this.goUp = false;
@@ -109,6 +116,7 @@ const game = {
     },
 
     init : function() {
+        this.initValue();
         this.groundLayer = game.display.createLayer("terrain", this.groundWidth, this.groundHeight, undefined, 0, "#000000", 0, 0);
         game.display.drawRectangleInLayer(this.groundLayer, this.netWidth, this.groundHeight, this.netColor, this.groundWidth/2 - this.netWidth/2, 0);
         
@@ -117,7 +125,7 @@ const game = {
         this.displayScore();
 
         this.playersBallLayer = game.display.createLayer("playerBall", this.groundWidth, this.groundHeight, undefined, 2, undefined, 0, 0);
-        game.display.drawTextInLayer(this.playersBallLayer, "PLAYERBALL", "10px Arial", "#FF0000", 100, 100);
+        //game.display.drawTextInLayer(this.playersBallLayer, "PLAYERBALL", "10px Arial", "#FF0000", 100, 100);
         this.initialPosition();
         this.displayBall();
         this.displayPlayers();
@@ -130,6 +138,9 @@ const game = {
         //game.display.drawCircleInLayer(this.scoreLayer, "blue", 60, 50, 6);
         game.display.drawTextInLayer(this.scoreLayer, this.scorePlayer1, "60px Arial", "#FFFFFF", this.scorePosPlayer1, 55);
         game.display.drawTextInLayer(this.scoreLayer, this.scorePlayer2, "60px Arial", "#FFFFFF", this.scorePosPlayer2, 55);
+        game.display.drawTextInLayer(this.scoreLayer, this.playerOne.playerName, "14px Arial", "#FFFFFF", this.namePosPlayer1, 30);
+        game.display.drawTextInLayer(this.scoreLayer, this.playerTwo.playerName, "14px Arial", "#FFFFFF", this.namePosPlayer2, 30);
+        
     },
 
     displayBall : function() {
@@ -229,8 +240,72 @@ const game = {
     },
 
     winCondition : function(){
-        if (this.scorePlayer1 == 5 || this.scorePlayer2 == 5)
+        if (this.scorePlayer1 == this.winValue)
+        {
+            winnerGame = this.playerOne.playerName;
             return (true);
+        }
+        else if (this.scorePlayer2 == this.winValue)
+        {
+            winnerGame = this.playerTwo.playerName;
+            return (true);
+        }
         return(false);
+    },
+    
+    initValue : function(){
+        const gameMode = sessionStorage.getItem('gameMode'); // 1-2-3-4
+        const playerOneName = sessionStorage.getItem('playerOneName'); // player one name
+        const playerTwoName = sessionStorage.getItem('playerTwoName'); // player two name
+        //const gameBackground = sessionStorage.getItem('gameBackground');
+        const gamePoints = sessionStorage.getItem('gamePoints'); // 9 max point
+        const ballSize = sessionStorage.getItem('ballSize'); //
+        const padSize = sessionStorage.getItem('padSize'); 
+        if (gameMode != undefined)
+        {
+            switch (gameMode){
+                case 1:
+                    this.playerTwo.aiOption = true;
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    this.playerTwo.aiOption = true;
+                    break;
+                case 4:
+                    break;
+            }
+        }
+        if (playerOneName != undefined)
+        {
+            this.playerOne.playerName = playerOneName;
+        }
+        if (playerTwoName != undefined)
+        {
+            this.playerTwo.playerName = playerTwoName;
+        }
+        if (gamePoints != undefined)
+        {
+            this.winValue = gamePoints;
+        }
+        if (ballSize != undefined)
+        {
+            if (ballSize == 1)
+                this.ball.height = this.ball.width = 6;
+            if (ballSize == 2)
+                this.ball.height = this.ball.width = 12;
+            else if (ballSize == 3)
+                this.ball.height = this.ball.width = 18;
+        }
+        if (padSize != undefined)
+        {
+            if (padSize == 1)
+                this.playerOne.height = this.playerTwo.height = 60;
+            else if (padSize == 2)
+                this.playerOne.height = this.playerTwo.height = 80;
+            else if (padSize == 3)
+                this.playerOne.height = this.playerTwo.height = 100;
+        }
+
     }
 };

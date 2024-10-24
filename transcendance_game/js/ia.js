@@ -12,21 +12,21 @@ game.ia = {
     },
     moveIa : function(player, ball){
         this.setPlayerAndBall(player, ball);
-        game.clearLayer(game.scoreLayer);
+        //game.clearLayer(game.scoreLayer);
         
-        game.display.drawTextInLayer(game.scoreLayer, this.ball.posX, "10px Arial", "#FF00FF", 100, 320);
-        game.display.drawTextInLayer(game.scoreLayer, game.groundWidth / 2, "10px Arial", "#FF00FF", 100, 330);
+        //game.display.drawTextInLayer(game.scoreLayer, this.ball.posX, "10px Arial", "#FF00FF", 100, 320);
+        //game.display.drawTextInLayer(game.scoreLayer, game.groundWidth / 2, "10px Arial", "#FF00FF", 100, 330);
         if (this.i % 60 == 0)
         {
             if (this.ball.directionX >= 0){
                 if (this.player.originalPosition == "left" )
                 {
-                    game.display.drawTextInLayer(game.scoreLayer, "Cas position left and go center", "10px Arial", "#FF0000", 100, 100);
+                    //game.display.drawTextInLayer(game.scoreLayer, "Cas position left and go center", "10px Arial", "#FF0000", 100, 100);
                     this.goCenter();
                 }
                 if (this.player.originalPosition == "right" && this.ball.posX >= game.groundWidth / 2)
                 {
-                    game.display.drawTextInLayer(game.scoreLayer, "Cas position right and go follow", "10px Arial", "#FF0000", 100, 150);
+                    //game.display.drawTextInLayer(game.scoreLayer, "Cas position right and go follow", "10px Arial", "#FF0000", 100, 150);
                     //this.followBall();
                     this.predictBall(this.ball.posRecX, this.ball.posRecY, this.ball.directionX, this.ball.directionY);
                 }
@@ -35,19 +35,19 @@ game.ia = {
             {
                 if (this.player.originalPosition == "left" && this.ball.posX <= game.groundWidth / 2)
                 {
-                    game.display.drawTextInLayer(game.scoreLayer, "Cas position right and go follow", "10px Arial", "#FF00FF", 100, 100);
+                    //game.display.drawTextInLayer(game.scoreLayer, "Cas position right and go follow", "10px Arial", "#FF00FF", 100, 100);
                     //this.followBall();
                     this.predictBall(this.ball.posRecX, this.ball.posRecY, this.ball.directionX, this.ball.directionY);
                 }
                 if (this.player.originalPosition == "right")
                 {
-                    game.display.drawTextInLayer(game.scoreLayer, "Cas position right and go center", "10px Arial", "#FF00FF", 100, 150);
+                    //game.display.drawTextInLayer(game.scoreLayer, "Cas position right and go center", "10px Arial", "#FF00FF", 100, 150);
                     this.goCenter();
                 }
             }
         }
         this.i = this.i + 1;
-        game.display.drawTextInLayer(game.scoreLayer, this.i, "10px Arial", "#FFFF00", 100, 200);
+        //game.display.drawTextInLayer(game.scoreLayer, this.i, "10px Arial", "#FFFF00", 100, 200);
     },
 
     // goCenter : function(){
@@ -92,7 +92,7 @@ game.ia = {
     //     }
     // }
     goCenter : function(){
-        game.display.drawTextInLayer(game.scoreLayer, "je suis dans center", "10px Arial", "#FF00FF", 100, 300);
+        //game.display.drawTextInLayer(game.scoreLayer, "je suis dans center", "10px Arial", "#FF00FF", 100, 300);
         if (this.player.originalPosition == "left")
         {
             this.player.goDown = false;

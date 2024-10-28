@@ -2,6 +2,7 @@ const game = {
     begin : false,
     winValue : 1,
     winnerGame : "Nothing",
+    styleGame : 0,
     groundWidth : 700,
     groundHeight : 400,
     groundColor: "#000000",
@@ -253,6 +254,27 @@ const game = {
         return(false);
     },
     
+    reset : function(){
+        //reset de la window
+        this.groundHeight = 400;
+        this.groundWidth = 700;
+        //reset de la game
+        this.styleGame = 0;
+        this.scorePlayer1 = 0;
+        this.scorePlayer2 = 0;
+        this.winValue = 5;
+        this.winnerGame = "Nothing";
+        //reset des noms
+        this.playerOne.playerName = "RandomOne";
+        this.playerTwo.playerName = "RandomTwo";
+        //ball
+        this.ball.height = this.ball.width = 12;
+        //pad
+        this.playerOne.height = this.playerTwo.height = 80;
+        //ia
+        this.playerTwo.aiOption = false;
+    },
+
     initValue : function(){
         const gameMode = sessionStorage.getItem('gameMode'); // 1-2-3-4
         const playerOneName = sessionStorage.getItem('playerOneName'); // player one name
@@ -260,11 +282,13 @@ const game = {
         //const gameBackground = sessionStorage.getItem('gameBackground');
         const gamePoints = sessionStorage.getItem('gamePoints'); // 9 max point
         const ballSize = sessionStorage.getItem('ballSize'); //
-        const padSize = sessionStorage.getItem('padSize'); 
+        const padSize = sessionStorage.getItem('padSize');
+        this.reset();
         if (gameMode != undefined)
         {
             switch (gameMode){
                 case 1:
+                    this.styleGame = 1;
                     this.playerTwo.aiOption = true;
                     break;
                 case 2:
@@ -306,6 +330,5 @@ const game = {
             else if (padSize == 3)
                 this.playerOne.height = this.playerTwo.height = 100;
         }
-
     }
 };

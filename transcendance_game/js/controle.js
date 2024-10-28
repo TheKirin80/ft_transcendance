@@ -27,11 +27,16 @@ game.controle = {
             document.body.removeChild(game.scoreLayer.canvas);
             game.clearLayer(game.groundLayer);
             document.body.removeChild(game.groundLayer.canvas);
+
         }
         if (event.keyCode == game.keycode.KEY_IA)
         {
             if (game.playerTwo.aiOption == true)
+            {
                 game.playerTwo.aiOption = false;
+                game.playerTwo.goDown = false;
+                game.playerTwo.goUp = false;
+            }
             else
             game.playerTwo.aiOption = true;
         }

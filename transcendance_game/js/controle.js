@@ -13,6 +13,20 @@ game.controle = {
         else if (event.keyCode == game.keycode.KEY_S && game.playerOne.aiOption == false && game.begin == true) {
             game.playerOne.goDown = true;
         }
+
+        if (game.styleGame > 2 && event.keyCode == game.keycode.KEY_R && game.begin == true) {
+            game.playerThree.goUp = true;
+        }
+        else if (game.styleGame > 2 && event.keyCode == game.keycode.KEY_F && game.begin == true) {
+            game.playerThree.goDown = true;
+        }
+
+        if (game.styleGame > 2 && event.keyCode == game.keycode.KEY_P && game.begin == true) {
+            game.playerFour.goUp = true;
+        }
+        else if (game.styleGame > 2 && event.keyCode == game.keycode.KEY_M && game.begin == true) {
+            game.playerFour.goDown = true;
+        }
         
         if (event.keyCode == game.keycode.KEY_Space && game.begin == false)
         {
@@ -54,5 +68,18 @@ game.controle = {
         else if (event.keyCode == game.keycode.KEY_S && game.playerOne.aiOption == false) {
             game.playerOne.goDown = false;
         }
+        if (game.styleGame > 2 && event.keyCode == game.keycode.KEY_R) {
+            game.playerThree.goUp = false;
+        }
+        else if (game.styleGame > 2 &&event.keyCode == game.keycode.KEY_F) {
+            game.playerThree.goDown = false;
+        }
+        if (game.styleGame > 2 && event.keyCode == game.keycode.KEY_P) {
+            game.playerFour.goUp = false;
+        }
+        else if (game.styleGame > 2 &&event.keyCode == game.keycode.KEY_M) {
+            game.playerFour.goDown = false;
+        }
+        
     }
 }
